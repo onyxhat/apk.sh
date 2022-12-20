@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # apk.sh v1.0
 # author: ax - github.com/ax
@@ -12,7 +12,8 @@
 VERSION="1.0"
 echo -e "[*] \033[1mapk.sh v$VERSION \033[0m"
 
-APK_SH_HOME="${HOME}/.apk.sh"
+SCRIPT_DIR=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+APK_SH_HOME="${SCRIPT_DIR}/.apk.sh"
 mkdir -p $APK_SH_HOME
 echo "[*] home dir is $APK_SH_HOME"
 
@@ -488,6 +489,12 @@ apk_pull(){
 
 #####################################################################
 #####################################################################
+
+if [ ! -z $1 ]&&[ $1 == "setup" ]; then
+	install_buildtools
+	check_apk_tools
+	exit
+fi
 
 check_apk_tools 
 
